@@ -9,7 +9,7 @@ package listas;
  *
  * @author Regina Vazquez
  */
-public interface ListaDesordenadaADT <T> extends ListaADT{
+public interface ListaDesordenadaADT<T> extends ListaADT<T>{
     void addInicio(T dato);
     void addFin(T dato);
     boolean addAntesQue(T referencia, T dato);

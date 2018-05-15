@@ -10,5 +10,5 @@ package listas;
  * @author Regina Vazquez
  */
 public interface ListaOrdenadaADT<T> extends ListaADT {
-    void add(T dato);
+    boolean add(T dato);
 }

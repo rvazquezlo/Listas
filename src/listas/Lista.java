@@ -14,14 +14,16 @@ import java.util.Objects;
  */
 public abstract class Lista<T> implements ListaADT{
     protected NodoDoble<T> primero;
+    protected NodoDoble<T> ultimo;
 
     public Lista() {
         primero = null;
+        ultimo = null;
     }
 
     @Override
     public String toString() {
-        return "Lista{" + "primero=" + primero.toString() + '}';
+        return "Lista{" + "primero=" + primero.toString() + ", ultimo=" + ultimo.toString() + '}';
     }
 
     /**
@@ -56,7 +58,9 @@ public abstract class Lista<T> implements ListaADT{
             auxiliar = primero;
             primero = primero.getDireccionDespues();
             if(!isEmpty())
-                primero.setDireccionAntes(null);   
+                primero.setDireccionAntes(null); 
+            else
+                ultimo = null;
             auxiliar.setDireccionDespues(null);
         }
         return eliminado;
@@ -64,7 +68,7 @@ public abstract class Lista<T> implements ListaADT{
 
     @Override
     public T removeLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
