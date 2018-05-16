@@ -7,9 +7,9 @@ package listas;
 
 /**
  *
- * @author edi
+ * @author Regina Vazquez
  */
-public class ListaDesordenada<T> extends Lista implements ListaDesordenadaADT<T>{
+public class ListaDesordenada<T> extends Lista<T> implements ListaDesordenadaADT<T>{
     
     public ListaDesordenada(){
         super();

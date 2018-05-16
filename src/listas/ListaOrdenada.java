@@ -9,9 +9,9 @@ import java.util.Iterator;
 
 /**
  *
- * @author edi
+ * @author Regina Vazquez
  */
-public class ListaOrdenada<T extends Comparable<T>> extends Lista<T> implements ListaOrdenadaADT<T>{
+public class ListaOrdenada<T extends Comparable <T>> extends Lista<T> implements ListaOrdenadaADT<T>{
     public ListaOrdenada(){
         super();
     }
@@ -30,7 +30,7 @@ public class ListaOrdenada<T extends Comparable<T>> extends Lista<T> implements 
         }
     }
     
-    
+    @Override
     public boolean contains(T dato){
         boolean contains;
         
@@ -60,6 +60,7 @@ public class ListaOrdenada<T extends Comparable<T>> extends Lista<T> implements 
         }
     }
     
+    @Override
     public T remove(T dato){
         T removed;
         
@@ -118,5 +119,6 @@ public class ListaOrdenada<T extends Comparable<T>> extends Lista<T> implements 
             }
                 
         }
+        return added;
     }
 }

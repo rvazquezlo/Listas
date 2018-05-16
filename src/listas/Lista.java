@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author Regina
  */
-public abstract class Lista<T> implements ListaADT{
+public abstract class Lista<T> implements ListaADT<T>{
     protected NodoDoble<T> primero;
     protected NodoDoble<T> ultimo;
 
@@ -68,17 +68,78 @@ public abstract class Lista<T> implements ListaADT{
 
     @Override
     public T removeLast() {
+        T removed;
+        NodoDoble<T> auxiliar;
+        
+        removed = null;
+        if(!isEmpty()){
+            removed = ultimo.getDato();
+            auxiliar = ultimo;
+            ultimo = ultimo.getDireccionAntes();
+            if(ultimo == null)
+                primero = null;
+            else
+                ultimo.setDireccionDespues(null);
+            auxiliar.setDireccionAntes(null);
+        }
+        return removed;
+    }
+
+    private T remove(T dato, NodoDoble<T> actual){
+        NodoDoble<T> siguiente;
+        
+        siguiente = actual.getDireccionDespues();
+        if(siguiente == null)//llegue al fin
+            return null;
+        if(actual.getDato().equals(dato)){
+            actual.getDireccionAntes().setDireccionDespues(siguiente);
+            siguiente.setDireccionAntes(actual.getDireccionAntes());
+            actual.setDireccionAntes(null);
+            actual.setDireccionDespues(null);
+            return actual.getDato();
+        }
+        else
+            return remove(dato, siguiente);
         
     }
-
+    
     @Override
-    public T remove(Object dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T remove(T dato) {
+        T removed;
+        
+        removed = null;
+        if(dato != null && !isEmpty()){
+            if(primero.getDato().equals(dato)){
+                removed = removeFirst();
+            }
+            else if(ultimo.getDato().equals(dato)){
+                removed = removeLast();
+            }
+            else
+                removed = remove(dato, primero);
+        }
+        return removed;
     }
 
+    private boolean contains(T dato, Iterator<T> iterador){
+        
+    }
+    
     @Override
-    public boolean contains(Object dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean contains(T dato) {
+        boolean contains;
+        
+        contains = false;
+        if(dato != null && !isEmpty()){
+            if(primero.getDato().equals(dato)){
+                contains = true;
+            }
+            else if(ultimo.getDato().equals(dato))
+                contains = true;
+            else
+                contains = contains(dato, iterator());
+        }  
+        return contains;    
     }
 
     @Override
@@ -98,7 +159,12 @@ public abstract class Lista<T> implements ListaADT{
 
     @Override
     public T obtieneUltimo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T datoUltimo;
+        
+        datoUltimo = null;
+        if(!isEmpty())
+            datoUltimo = ultimo.getDato();
+        return datoUltimo;
     }
     
     
