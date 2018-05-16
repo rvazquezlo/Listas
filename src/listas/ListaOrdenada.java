@@ -114,10 +114,8 @@ public class ListaOrdenada<T extends Comparable <T>> extends Lista<T> implements
                     apuntador.getDireccionAntes().setDireccionDespues(nuevo);
                     apuntador.setDireccionAntes(nuevo);
                     added = true;
-                }
-                
-            }
-                
+                }  
+            }       
         }
         return added;
     }

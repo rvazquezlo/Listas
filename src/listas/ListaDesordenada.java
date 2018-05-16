@@ -19,19 +19,32 @@ public class ListaDesordenada<T> extends Lista<T> implements ListaDesordenadaADT
     public void addInicio(T dato) {
         NodoDoble<T> nuevo;
         
-        nuevo = new NodoDoble(dato);
-        if(isEmpty())
-            ultimo = nuevo;
-        else{
-            primero.setDireccionAntes(nuevo);
-            nuevo.setDireccionDespues(primero);
-        }
-        primero = nuevo;
+        if(dato != null){
+            nuevo = new NodoDoble(dato);
+            if(isEmpty())
+                ultimo = nuevo;
+            else{
+                primero.setDireccionAntes(nuevo);
+                nuevo.setDireccionDespues(primero);
+            }
+            primero = nuevo;
+        } 
     }
 
     @Override
     public void addFin(T dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NodoDoble<T> nuevo;
+        
+        if(dato != null){
+            nuevo = new NodoDoble(dato);
+            if(isEmpty())
+                primero = nuevo;
+            else{
+                ultimo.setDireccionDespues(nuevo);
+                nuevo.setDireccionAntes(ultimo);
+            }
+            ultimo = nuevo;
+        }
     }
 
     @Override
@@ -64,7 +77,30 @@ public class ListaDesordenada<T> extends Lista<T> implements ListaDesordenadaADT
 
     @Override
     public boolean addDespuesQue(T referencia, T dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean agregado;
+        NodoDoble<T> apuntador, nuevo;
+        
+        agregado = false;
+        if(!isEmpty() && referencia != null && dato != null){
+            if(ultimo.getDato().equals(referencia)){
+                agregado = true;
+                addFin(dato);
+            }
+            else{
+                apuntador = ultimo.getDireccionAntes();
+                while(apuntador != null && !apuntador.getDato().equals(dato))
+                    apuntador = apuntador.getDireccionAntes();
+                if(apuntador != null){
+                    nuevo = new NodoDoble(dato);
+                    nuevo.setDireccionAntes(apuntador);
+                    nuevo.setDireccionDespues(apuntador.getDireccionDespues());
+                    apuntador.getDireccionDespues().setDireccionAntes(nuevo);
+                    apuntador.setDireccionDespues(nuevo);
+                    agregado = true;
+                }
+            }
+        }
+        return agregado;
     }
     
 }
