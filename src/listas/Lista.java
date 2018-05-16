@@ -6,7 +6,6 @@
 package listas;
 
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
  *
@@ -122,7 +121,11 @@ public abstract class Lista<T> implements ListaADT<T>{
     }
 
     private boolean contains(T dato, Iterator<T> iterador){
-        
+        if(!iterador.hasNext())
+            return false;
+        if(dato.equals(iterador.next()))
+            return true;
+        return contains(dato, iterador);
     }
     
     @Override
@@ -130,21 +133,23 @@ public abstract class Lista<T> implements ListaADT<T>{
         boolean contains;
         
         contains = false;
-        if(dato != null && !isEmpty()){
-            if(primero.getDato().equals(dato)){
-                contains = true;
-            }
-            else if(ultimo.getDato().equals(dato))
-                contains = true;
-            else
-                contains = contains(dato, iterator());
-        }  
+        if(dato != null && !isEmpty())
+            contains = contains(dato, iterator());
         return contains;    
     }
 
     @Override
     public int calculaSize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Iterator<T> iterador;
+        int size;
+        
+        iterador = this.iterator();
+        size = 0;
+        while(iterador.hasNext()){
+            size++;
+            iterador.next();
+        }
+        return size;
     }
 
     @Override
