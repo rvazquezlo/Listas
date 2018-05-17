@@ -16,6 +16,27 @@ public class ListaOrdenada<T extends Comparable <T>> extends Lista<T> implements
         super();
     }
     
+    private boolean equals()
+    
+    @Override
+    public boolean equals(Object otra){
+        boolean iguales;
+        ListaOrdenada<?> otraLista;
+        Iterator<T> iterador, iteradorOtra;
+        
+        iguales = false;
+        if(otra != null){
+            if(otra == this)
+                iguales = true;
+            else if(otra.getClass() == this.getClass()){
+                otraLista = (ListaOrdenada<?>)otra;
+                
+            }
+                        
+        }
+        return iguales;
+    }
+    
     private boolean contains(T dato, Iterator<T> iterador){
         T actual;
         
@@ -119,4 +140,27 @@ public class ListaOrdenada<T extends Comparable <T>> extends Lista<T> implements
         }
         return added;
     }
+    
+    private void toString(StringBuilder sb, Iterator<T> iterador){
+        if(iterador.hasNext()){
+            sb.append(", " + iterador.next().toString());    
+            toString(sb, iterador);
+        }
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb;
+        Iterator<T> iterador;
+        
+        sb = new StringBuilder();
+        sb.append("Lista Ordenada: ");
+        iterador = iterator();
+        if(iterador.hasNext())
+            sb.append(iterador.next());
+        toString(sb, iterador);
+        return sb.toString();
+    }
+    
+    
 }

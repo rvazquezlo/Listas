@@ -6,6 +6,7 @@
 package listas;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  *
@@ -24,17 +25,43 @@ public abstract class Lista<T> implements ListaADT<T>{
     public String toString() {
         return "Lista{" + "primero=" + primero.toString() + ", ultimo=" + ultimo.toString() + '}';
     }
+    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
 
     /**
      * Pendiente
      * @param obj
-     * @return 
-     */
-    @Override
+     * @return
+    //     */
+//    @Override
+//    public boolean equals(Object obj) {
+//        return true;
+//    }
+    @Override    
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Lista<?> other = (Lista<?>) obj;
+        if (!Objects.equals(this.primero, other.primero)) {
+            return false;
+        }
+        if (!Objects.equals(this.ultimo, other.ultimo)) {
+            return false;
+        }
         return true;
     }
-    
 
     @Override
     public Iterator iterator() {

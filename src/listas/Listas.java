@@ -15,7 +15,11 @@ public class Listas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ListaDesordenada<Integer> lista;
+        
+        lista = new ListaDesordenada();
+        lista.addInicio(4);
+        
     }
     
 }
